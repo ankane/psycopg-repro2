@@ -15,6 +15,6 @@ jobs:
         with:
           python-version: 3.12
       - run: pip install -e psycopg
-      - run: python tests/scripts/copytest.py --colsize 20 --nrecs 1000000
+      - run: python tests/scripts/copytest.py --colsize 100 --nrecs 1000000
       - run: git revert --no-commit 921b4afe8171e6732405b575b92fe1f8a58c347a
-      - run: python tests/scripts/copytest.py --colsize 20 --nrecs 1000000
+      - run: python tests/scripts/copytest.py --colsize 100 --nrecs 1000000
