@@ -1,34 +1,16 @@
 name: build
 on: push
 jobs:
-  ubuntu:
-    runs-on: ubuntu-22.04
+  windows:
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
         with:
           repository: ankane/psycopg
           ref: copy-performance
           fetch-depth: 0
-      - run: sudo service postgresql start
-      - run: sudo -u postgres createuser runner -s
-      - run: createdb runner
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.12
-      - run: pip install -e psycopg
-      - run: tests/scripts/copytest.py --colsize 200 --nrecs 1000000
-      - run: git revert --no-commit 921b4afe8171e6732405b575b92fe1f8a58c347a
-      - run: tests/scripts/copytest.py --colsize 200 --nrecs 1000000
-  mac:
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: ankane/psycopg
-          ref: copy-performance
-          fetch-depth: 0
-      - run: brew install postgresql
-      - run: brew services start postgresql
+      - run: sc config postgresql-x64-14 start=auto
+      - run: net start postgresql-x64-14
       - run: createdb runner
       - uses: actions/setup-python@v4
         with:
