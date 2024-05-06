@@ -11,7 +11,6 @@ jobs:
           fetch-depth: 0
       - run: sc config postgresql-x64-14 start=auto
       - run: net start postgresql-x64-14
-      - run: "C:\\Program Files\\PostgreSQL\\14\\bin\\createdb" runner
       - uses: actions/setup-python@v4
         with:
           python-version: 3.12
